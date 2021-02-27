@@ -1,0 +1,27 @@
+﻿@*@model UserCartViewModel
+
+<div class="card col-lg-3 m-4">
+<div class="container">
+    @foreach (var el in Model.userCart)
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Тариф: </b>@el.name <br />
+            <b>Ціна: </b>@el.price.ToString("C")
+        </div>
+    }
+    <hr />
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Оплатити</a>
+</div>*@
+
+@model NewUserCartViewModel
+<div class="container">
+    @foreach (var el in Model.userCart.listUserItems)
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Тариф: </b>@el.taruf.name <br />
+            <b>Ціна: </b>@el.taruf.price.ToString("C")
+        </div>
+    }
+    <hr />
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Оплатити</a>
+</div>

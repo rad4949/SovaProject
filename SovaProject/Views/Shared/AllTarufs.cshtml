@@ -1,0 +1,121 @@
+﻿@model Taruf
+    <style>
+        .colorCard {
+            background-color: #90ff77;
+        }
+
+        .colorText {
+            color: black;
+        }
+
+        input {
+            outline: none;
+            margin: 0;
+            border: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            width: 100%;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .input-icon {
+            position: absolute;
+            font-size: 18px;
+            color: black;
+            right: 8px;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 33px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .input--style-3 {
+            padding: 5px 0;
+            font-size: 16px;
+            color: black;
+            background: transparent;
+        }
+
+            .input--style-3::-webkit-input-placeholder {
+                /* WebKit, Blink, Edge */
+                color: black;
+            }
+
+            .input--style-3:-moz-placeholder {
+                /* Mozilla Firefox 4 to 18 */
+                color: black;
+                opacity: 1;
+            }
+
+            .input--style-3::-moz-placeholder {
+                /* Mozilla Firefox 19+ */
+                color: black;
+                opacity: 1;
+            }
+
+            .input--style-3:-ms-input-placeholder {
+                /* Internet Explorer 10-11 */
+                color: black;
+            }
+
+            .input--style-3:-ms-input-placeholder {
+                /* Microsoft Edge */
+                color: black;
+            }
+
+
+        .btn {
+            display: inline-block;
+            line-height: 40px;
+            padding: 0 33px;
+            font-family: Poppins, Arial, "Helvetica Neue", sans-serif;
+            cursor: pointer;
+            color: black;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            font-size: 18px;
+        }
+
+        .btn--pill {
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+        }
+
+        .btn--green {
+            background-color: silver;
+        }
+
+            .btn--green:hover {
+                background: #4dae3c;
+            }
+
+        .cardImg {
+            margin-top: 5%;
+        }
+    </style>
+
+
+    <div class="colorCard card col-lg-3 m-4 ">
+        <img src="@Model.img" class="card-img-top cardImg" alt="Model.name">
+        <div class="card-body">
+            <h5 class="card-title">Модель: @Model.name</h5>
+            <p class="card-text">@Model.shortDesc</p>
+            <p class="card-text">Ціна: @Model.price.ToString("C3")</p>
+            <p class="card-text">Місто: @Model.Category.categoryName</p>
+            <p><a class="btn btn--pill btn--green " asp-controller="UserCart" asp-action="addToCart" asp-route-id="@Model.id">Замовити</a></p>
+        </div>
+    </div>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SOWa</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .headerColor {
+            background: #90ff77;
+        }
+        .headerText{
+            color: black;
+        }
+        .btn {
+            float: right;
+            line-height: 40px;
+            padding: 0 33px;
+            font-family: Poppins, Arial, "Helvetica Neue", sans-serif;
+            cursor: pointer;
+            color: black;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            font-size: 18px;
+        }
+
+        .btn--pill {
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+        }
+
+        .btn--green {
+            background-color: silver;
+        }
+
+            .btn--green:hover {
+                background: #4dae3c;
+            }
+    </style>
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm @*navbar-light bg-white*@ border-bottom box-shadow headerColor mb-3">
+            <div class="container">
+                <a class="navbar-brand headerText" asp-area="" asp-controller="Home" asp-action="Index">SOWa</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link headerText" href="/Tarufs/list/Sarny">Сарни</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerText" href="/Tarufs/list/ExperimentalStation">Дослідна станція</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerText" href="/Tarufs/list/Klesiv">Клесів</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerText" href="/Tarufs/list/Karpylivka">Карпилівка</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerText" href="/UserCart/">Корзина</a>
+                        </li>
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline my-2 my-lg-0" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @*<a asp-controller="Profile" asp-action="Index">Привіт @User.Identity.Name</a>*@
+
+                            <a href="#" onclick="document.getElementById('logoutForm').submit();"
+                               class="@*nav-link*@ btn btn--pill btn--green">
+                                Вихід
+                            </a>
+
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link btn btn--pill btn--green" asp-area="" asp-controller="Account" asp-action="Login">Вхід</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021  <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

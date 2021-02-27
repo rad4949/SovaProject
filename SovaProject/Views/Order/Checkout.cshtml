@@ -1,0 +1,200 @@
+﻿@model Order
+@*<div class="row">
+        <h3>Створення замовлення</h3>
+        <form asp-action="Checkout" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label asp-for="name"></label>
+                    <div class="col-md-5">
+                        <input asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="surname"></label>
+                    <div class="col-md-5">
+                        <input asp-for="surname" class="form-control" />
+                        <span asp-validation-for="surname" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="adress"></label>
+                    <div class="col-md-5">
+                        <input asp-for="adress" class="form-control" />
+                        <span asp-validation-for="adress" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="phone"></label>
+                    <div class="col-md-5">
+                        <input asp-for="phone" class="form-control" />
+                        <span asp-validation-for="phone" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <input class="btn btn-warning" type="submit" value="Закінчити замовлення" />
+            </form>
+    </div>*@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Colorlib Templates">
+@*<meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">*@
+
+<link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+<link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+<link href="~/css/main.css" rel="stylesheet" media="all">
+
+<style>
+    .colorCard {
+        background-color: #90ff77;
+    }
+    .colorText{
+        color: black;
+    }
+    input {
+        outline: none;
+        margin: 0;
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 100%;
+        font-size: 14px;
+        font-family: inherit;
+    }
+
+    .input-icon {
+        position: absolute;
+        font-size: 18px;
+        color: black;
+        right: 8px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 33px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .input--style-3 {
+        padding: 5px 0;
+        font-size: 16px;
+        color: black;
+        background: transparent;
+    }
+
+        .input--style-3::-webkit-input-placeholder {
+            /* WebKit, Blink, Edge */
+            color: black;
+        }
+
+        .input--style-3:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: black;
+            opacity: 1;
+        }
+
+        .input--style-3::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: black;
+            opacity: 1;
+        }
+
+        .input--style-3:-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: black;
+        }
+
+        .input--style-3:-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: black;
+        }
+
+
+    .btn {
+        display: inline-block;
+        line-height: 40px;
+        padding: 0 33px;
+        font-family: Poppins, Arial, "Helvetica Neue", sans-serif;
+        cursor: pointer;
+        color: black;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        font-size: 18px;
+    }
+   
+    .btn--pill {
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+    }
+
+    .btn--green {
+        background-color: silver;
+    }
+
+        .btn--green:hover {
+            background: #4dae3c;
+        }
+</style>
+
+
+<body >
+    <div class="wrapper wrapper--w780 ">
+        <div class="card card-3 colorCard">
+            <div class="card-body colorCard">
+                <h2 class="colorText title">Створення замовлення</h2>
+                <form method="POST">
+                    <div class="input-group">
+                        <input asp-for="name" class="input--style-3" type="text" placeholder="Введіть ім'я" name="name">
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="input-group">
+                        <input asp-for="surname" class="input--style-3" type="text" placeholder="Введіть прізвище" name="surname">
+                        <span asp-validation-for="surname" class="text-danger"></span>
+                    </div>
+                    <div class="input-group">
+                        <input asp-for="adress" class="input--style-3" type="text" placeholder="Введіть адрес" name="adress">
+                        <span asp-validation-for="adress" class="text-danger"></span>
+                    </div>
+                    <div class="input-group">
+                        <input asp-for="phone" class="input--style-3" type="text" placeholder="Введіть телефон" name="phone">
+                        <span asp-validation-for="phone" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <button class="btn btn--pill btn--green" type="submit">Закінчити замовлення</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Jquery JS-->
+    <script src="~/vendor/jqueryForm/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/datepicker/moment.min.js"></script>
+    <script src="~/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->

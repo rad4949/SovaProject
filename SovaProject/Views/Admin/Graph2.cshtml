@@ -1,0 +1,74 @@
+﻿@model Graph2ViewModel
+@{
+    ViewData["Title"] = "Graph";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<h1>Статистика коштів</h1>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chLine" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsGraph2 {
+    <script>
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d', '#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d' ];
+
+        var chLine = document.getElementById("chLine");
+        var chartData = {
+            labels: [
+                        @foreach(var item in Model.listElementMoney)
+                        {
+                            @:"@Html.Raw(item.label)",
+                        }
+            ],
+            datasets: [{
+                //data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                //backgroundColor: 'transparent',
+                //borderColor: colors[0],
+                //borderWidth: 4,
+                //pointBackgroundColor: colors[0]
+            },
+            {
+               data: [
+                            @foreach(var item in Model.listElementMoney)
+                            {
+                               @:@item.value,
+                            }
+                ],
+                backgroundColor: colors[3],
+                borderColor: colors[1],
+                borderWidth: 4,
+                pointBackgroundColor: colors[1]
+            }]
+        };
+
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+        }       
+
+    </script>
+}

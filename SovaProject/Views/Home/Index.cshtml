@@ -1,0 +1,11 @@
+﻿@model HomeViewModel
+
+<h1>Топ-продажів</h1>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Taruf taruf in Model.favTarufs)
+        {
+            @Html.Partial("AllTarufs", taruf)
+        }
+    }
+</div>

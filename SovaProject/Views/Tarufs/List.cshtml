@@ -1,0 +1,9 @@
+﻿<h3>@Model.currCategory</h3>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Taruf taruf in Model.allTarufs)
+        {
+           @Html.Partial("AllTarufs", taruf)
+        }
+    }
+</div>

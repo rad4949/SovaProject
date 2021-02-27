@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    //"DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=_CHANGE_ME;Trusted_Connection=True;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=den1.mssql8.gear.host; Database=sovaproject; User Id=sovaproject; Password=Rt3No9b4-?aK; MultipleActiveResultSets=true"
+  }
+}
