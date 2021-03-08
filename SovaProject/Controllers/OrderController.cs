@@ -32,7 +32,7 @@ namespace SovaProject.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            //var listShopCart = _appDBContent.UserCartItem.Include(x => x.taruf).AsQueryable();
+            //var listShopCart = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
             userCart.listUserItems = userCart.getUserItems();
 
             //if (listShopCart == null)

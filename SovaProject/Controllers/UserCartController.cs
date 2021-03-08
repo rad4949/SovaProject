@@ -27,12 +27,12 @@ namespace SovaProject.Controllers
 
         public ViewResult Index()
         {
-            //var list = _appDBContent.UserCartItem.Include(x => x.taruf).AsQueryable();
+            //var list = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
             //UserCartViewModel obj = new UserCartViewModel();
             //obj.userCart = list.Select(x => new UserCart1ViewModel
             //{
-            //    name = x.taruf.name,
-            //    price = x.price
+            //    Name = x.Taruf.Name,
+            //    Price = x.Price
             //}).ToList();
 
             var items = _userCart.getUserItems();
@@ -45,10 +45,10 @@ namespace SovaProject.Controllers
 
             return View(obj);
         }
-        [Route("UserCart/addToCart/{id?}")]
+        [Route("UserCart/addToCart/{Id?}")]
         public RedirectToActionResult addToCart(int id)
         {
-            var item = _tarufRep.Tarufs.FirstOrDefault(i => i.id == id);
+            var item = _tarufRep.Tarufs.FirstOrDefault(i => i.Id == id);
             if (item != null)
             {
                 _userCart.AddToCart(item);

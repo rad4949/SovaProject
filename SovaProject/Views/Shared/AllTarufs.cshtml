@@ -110,12 +110,12 @@
 
 
     <div class="colorCard card col-lg-3 m-4 ">
-        <img src="@Model.img" class="card-img-top cardImg" alt="Model.name">
+        <img src="@Model.Img" class="card-img-top cardImg" alt="Model.name">
         <div class="card-body">
-            <h5 class="card-title">Модель: @Model.name</h5>
-            <p class="card-text">@Model.shortDesc</p>
-            <p class="card-text">Ціна: @Model.price.ToString("C3")</p>
-            <p class="card-text">Місто: @Model.Category.categoryName</p>
-            <p><a class="btn btn--pill btn--green " asp-controller="UserCart" asp-action="addToCart" asp-route-id="@Model.id">Замовити</a></p>
+            <h5 class="card-title">Модель: @Model.Name</h5>
+            <p class="card-text">@Model.ShortDesc</p>
+            <p class="card-text">Ціна: @Model.Price.ToString("C3")</p>
+            <p class="card-text">Місто: @Model.Category.CategoryName</p>
+            <p><a class="btn btn--pill btn--green " asp-controller="UserCart" asp-action="addToCart" asp-route-id="@Model.Id">Замовити</a></p>
         </div>
     </div>

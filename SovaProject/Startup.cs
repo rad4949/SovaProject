@@ -63,8 +63,8 @@ namespace SovaProject
             // app.UseMvcWithDefaultRoute();
             //app.UseMvc(routes =>
             //{
-            //    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-            //    routes.MapRoute(name: "CategoryFilter", template: "Taruf{action}/{category?}", defaults: new { Controller = "Tarufs", action = "List" });
+            //    routes.MapRoute(Name: "default", template: "{controller=Home}/{action=Index}/{Id?}");
+            //    routes.MapRoute(Name: "CategoryFilter", template: "Taruf{action}/{category?}", defaults: new { Controller = "Tarufs", action = "List" });
             //});
 
             app.UseRouting();
@@ -90,7 +90,7 @@ namespace SovaProject
                 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                    pattern: "{controller=Home}/{action=Index}/{Id?}"
                     );
                 
 

@@ -15,10 +15,10 @@ namespace SovaProject.Data.mocks
             {
                 return new List<Category>
                 {
-                    new Category{ categoryName="Сарни", desc=""},
-                    new Category{ categoryName="Дослідна станція", desc=""},
-                    new Category{ categoryName="Клесів", desc=""},
-                    new Category{ categoryName="Карпилівка", desc=""},
+                    new Category{ CategoryName="Сарни", Desc=""},
+                    new Category{ CategoryName="Дослідна станція", Desc=""},
+                    new Category{ CategoryName="Клесів", Desc=""},
+                    new Category{ CategoryName="Карпилівка", Desc=""},
                 };
             }
         }

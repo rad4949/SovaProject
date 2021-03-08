@@ -33,8 +33,8 @@ namespace SovaProject.Data.Models
             //var cart = new UserCartItem
             //{
             //    UserCartId = UserCartId,
-            //    taruf = taruf,
-            //    price = taruf.price
+            //    Taruf = Taruf,
+            //    Price = Taruf.Price
             //};
             //_appDBContent.UserCartItem.Add(cart);
             //_appDBContent.SaveChanges();
@@ -42,8 +42,8 @@ namespace SovaProject.Data.Models
             _appDBContent.UserCartItem.Add(new UserCartItem
             {
                 UserCartId=UserCartId,
-                taruf=taruf,
-                price=taruf.price
+                Taruf=taruf,
+                Price=taruf.Price
             });
 
             _appDBContent.SaveChanges();
@@ -52,7 +52,7 @@ namespace SovaProject.Data.Models
         public List<UserCartItem> getUserItems()
         {
             //return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.tarufId).ToList();
-            return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.taruf).ToList();
+            return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.Taruf).ToList();
         }
     }
 }

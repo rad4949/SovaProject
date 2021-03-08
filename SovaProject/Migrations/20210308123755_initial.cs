@@ -52,31 +52,32 @@ namespace SovaProject.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    categoryName = table.Column<string>(nullable: true),
-                    desc = table.Column<string>(nullable: true)
+                    CategoryName = table.Column<string>(nullable: true),
+                    Desc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.id);
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(maxLength: 15, nullable: false),
-                    surname = table.Column<string>(maxLength: 15, nullable: false),
-                    adress = table.Column<string>(maxLength: 255, nullable: false),
-                    phone = table.Column<string>(maxLength: 10, nullable: false),
-                    orderTime = table.Column<DateTime>(nullable: false)
+                    Name = table.Column<string>(maxLength: 15, nullable: false),
+                    Surname = table.Column<string>(maxLength: 15, nullable: false),
+                    Adress = table.Column<string>(maxLength: 255, nullable: false),
+                    Phone = table.Column<string>(maxLength: 10, nullable: false),
+                    OrderTime = table.Column<DateTime>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.id);
+                    table.PrimaryKey("PK_Order", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,25 +190,25 @@ namespace SovaProject.Migrations
                 name: "Taruf",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(nullable: true),
-                    shortDesc = table.Column<string>(nullable: true),
-                    longDesc = table.Column<string>(nullable: true),
-                    img = table.Column<string>(nullable: true),
-                    price = table.Column<long>(nullable: false),
-                    isFavorite = table.Column<bool>(nullable: false),
-                    available = table.Column<bool>(nullable: false),
-                    categoryID = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    ShortDesc = table.Column<string>(nullable: true),
+                    LongDesc = table.Column<string>(nullable: true),
+                    Img = table.Column<string>(nullable: true),
+                    Price = table.Column<long>(nullable: false),
+                    IsFavorite = table.Column<bool>(nullable: false),
+                    Available = table.Column<bool>(nullable: false),
+                    CategoryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Taruf", x => x.id);
+                    table.PrimaryKey("PK_Taruf", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Taruf_Category_categoryID",
-                        column: x => x.categoryID,
+                        name: "FK_Taruf_Category_CategoryID",
+                        column: x => x.CategoryID,
                         principalTable: "Category",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -215,26 +216,26 @@ namespace SovaProject.Migrations
                 name: "OrderDetail",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    orderID = table.Column<int>(nullable: false),
+                    OrderID = table.Column<int>(nullable: false),
                     TarufID = table.Column<int>(nullable: false),
-                    price = table.Column<long>(nullable: false)
+                    Price = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetail", x => x.id);
+                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetail_Order_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetail_Taruf_TarufID",
                         column: x => x.TarufID,
                         principalTable: "Taruf",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetail_Order_orderID",
-                        column: x => x.orderID,
-                        principalTable: "Order",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -244,18 +245,18 @@ namespace SovaProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    tarufid = table.Column<int>(nullable: true),
-                    price = table.Column<long>(nullable: false),
+                    TarufId = table.Column<int>(nullable: true),
+                    Price = table.Column<long>(nullable: false),
                     UserCartId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserCartItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserCartItem_Taruf_tarufid",
-                        column: x => x.tarufid,
+                        name: "FK_UserCartItem_Taruf_TarufId",
+                        column: x => x.TarufId,
                         principalTable: "Taruf",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -299,24 +300,24 @@ namespace SovaProject.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderDetail_OrderID",
+                table: "OrderDetail",
+                column: "OrderID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_TarufID",
                 table: "OrderDetail",
                 column: "TarufID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_orderID",
-                table: "OrderDetail",
-                column: "orderID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Taruf_categoryID",
+                name: "IX_Taruf_CategoryID",
                 table: "Taruf",
-                column: "categoryID");
+                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCartItem_tarufid",
+                name: "IX_UserCartItem_TarufId",
                 table: "UserCartItem",
-                column: "tarufid");
+                column: "TarufId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

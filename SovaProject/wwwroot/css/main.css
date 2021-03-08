@@ -543,7 +543,7 @@ button {
 }
 
 body {
-    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+    font-family: "Poppins", "Helvetica Neue", sans-serif;
     font-weight: 400;
     font-size: 14px;
 }
@@ -627,7 +627,7 @@ h6 {
    ========================================================================== */
 .wrapper {
     margin: 0 auto;
-    background-color: #90ff77;
+    background-color: white;
 }
 
 .wrapper--w960 {
@@ -636,7 +636,7 @@ h6 {
 
 .wrapper--w780 {
     max-width: 780px;
-    background-color: #90ff77;
+    background-color: white;
 }
 
 .wrapper--w680 {
@@ -909,7 +909,7 @@ input {
 }
 
 .cardColor {
-    background: #90ff77;
+     background: #90ff77;
 }
 
 .card-3 {
@@ -917,22 +917,22 @@ input {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    /* -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);*/
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     width: 100%;
     display: table;
 }
 
     .card-3 .card-heading {
-        /*background: url("../img/logo_sowa_form.jpg") top left/cover no-repeat;*/
+        background: url("../img/logo_sowa_form.jpg") top left/cover no-repeat;
         background: #90ff77;
         display: table-cell;
         width: 60%;
     }
 
     .card-3 .card-body {
-        background: #90ff77;
+        /*background: #90ff77;*/
         padding: 57px 65px;
         padding-bottom: 65px;
         display: table-cell;

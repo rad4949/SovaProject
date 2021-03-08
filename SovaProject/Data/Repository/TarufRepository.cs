@@ -19,8 +19,8 @@ namespace SovaProject.Data.Repository
         public IEnumerable<Taruf> Tarufs => appDBContent.Taruf.Include(c => c.Category);
 
 
-        public IEnumerable<Taruf> getFavTarufs => appDBContent.Taruf.Where(p => p.isFavorite).Include(c => c.Category);
+        public IEnumerable<Taruf> getFavTarufs => appDBContent.Taruf.Where(p => p.IsFavorite).Include(c => c.Category);
 
-        public Taruf getObjectTaruf(int tarufId) => appDBContent.Taruf.FirstOrDefault(p => p.id == tarufId);
+        public Taruf getObjectTaruf(int tarufId) => appDBContent.Taruf.FirstOrDefault(p => p.Id == tarufId);
     }
 }

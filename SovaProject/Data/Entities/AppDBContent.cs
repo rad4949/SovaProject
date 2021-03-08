@@ -23,7 +23,6 @@ namespace SovaProject.Data.Entities
         public DbSet<UserCartItem> UserCartItem { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
-        public DbSet<UserIsActive> UserIsActives { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -7,9 +7,9 @@ namespace SovaProject.Data.Models
 {
     public class Category
     {
-        public int id { get; set; }
-        public string categoryName { get; set; }
-        public string desc { get; set; }
-        public List<Taruf> tarufs { get; set; }
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
+        public string Desc { get; set; }
+        public List<Taruf> Tarufs { get; set; }
     }
 }

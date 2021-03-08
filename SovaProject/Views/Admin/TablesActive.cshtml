@@ -20,92 +20,44 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <h1>Список клієнтів з їхнім статусом</h1>
 
+@await Html.PartialAsync("_SearchData", Model.Filter)
+
+
 <div class="card shadow mb-4">
     <div class="card-body">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="dataTable_length">
-                    <label>
-                        Показати <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="dataTable_filter" class="dataTables_filter">
-                    <label>
-                        Search: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                    </label>
-                </div>
-            </div>
-        </div>
+        @*<div class="row">
+
+        </div>*@
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
                        aria-describedby="dataTable_info" style="width: 100%;">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-sort="ascending" aria-label="Name: activate to sort column descending"
-                                style="width: 40px;">
-                                №
-                            </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-sort="ascending" aria-label="Name: activate to sort column descending"
-                                style="width: 100px;">
-                                Ім'я
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-label="Position: activate to sort column ascending" style="width: 100px;">
-                                Фамілія
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-label="Office: activate to sort column ascending" style="width: 169px;">
-                                Адрес
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-label="Age: activate to sort column ascending" style="width: 31px;">
-                                Телефон
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-label="Start date: activate to sort column ascending" style="width: 69px;">
-                                Час
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-label="Start date: activate to sort column ascending" style="width: 69px;">
-                                Статус
-                            </th>
+                    <t>
+                        <tr>
+                            <th rowspan="1" colspan="1">№</th>
+                            <th rowspan="1" colspan="1">Ім'я</th>
+                            <th rowspan="1" colspan="1">Фамілія</th>
+                            <th rowspan="1" colspan="1">Адрес</th>
+                            <th rowspan="1" colspan="1">Телефон</th>
+                            <th rowspan="1" colspan="1">Час</th>
+                            <th rowspan="1" colspan="1">Статус</th>
                         </tr>
-                    </thead>
-                    @*<tfoot>
-                            <tr>
-                                <th rowspan="1" colspan="1">№</th>
-                                <th rowspan="1" colspan="1">Ім'я</th>
-                                <th rowspan="1" colspan="1">Фамілія</th>
-                                <th rowspan="1" colspan="1">Адрес</th>
-                                <th rowspan="1" colspan="1">Телефон</th>
-                                <th rowspan="1" colspan="1">Час</th>
-                            </tr>
-                        </tfoot>*@
+                    </t>
                     <tbody>
-                        @foreach (var item in Model.listActiveElement)
+                        @foreach (var item in Model.ListActiveElement)
                         {
                             <tr role="row" class="odd">
-                                <td>@(Model.listActiveElement.IndexOf(item) + 1)</td>
-                                <td class="sorting_1">@item.order.name</td>
-                                <td>@item.order.surname</td>
-                                <td>@item.order.adress</td>
-                                <td>@item.order.phone</td>
-                                <td>@item.order.orderTime</td>
+                                <td>@(Model.ListActiveElement.IndexOf(item) + 1)</td>
+                                <td class="sorting_1">@item.Name</td>
+                                <td>@item.Surname</td>
+                                <td>@item.Adress</td>
+                                <td>@item.Phone</td>
+                                <td>@item.OrderTime</td>
                                 <td>
                                     @if (item.IsActive == false)
                                     {
                                         <form asp-controller="Admin" asp-action="SetActive" method="post">
-                                            <input type="hidden" value="@item.order.id" name="id" />
+                                            <input type="hidden" value="@item.Id" name="id" />
                                             <button class="btn-danger">
                                                 <span class="btn-gradient">
                                                     <i class="fa fa-warning"></i>
@@ -113,25 +65,9 @@
                                                 <span class="btn-text">Начерзі</span>
                                             </button>
                                         </form>
-                                        @*<input type="hidden" value="@item.order.id" name="id" />
-                                            <button class="btn-danger">
-                                                <span class="btn-gradient">
-                                                    <i class="fa fa-warning"></i>
-                                                </span>
-                                                <span class="btn-text">Начерзі</span>
-                                            </button>*@
                                     }
                                     else
                                     {
-                                        @*<p> Готово <i class="fas fa-bolt fa-3x amber-text pr-3" aria-hidden="true"></i></p>
-                                                                        <i class="fas fa-badge-check"></i>
-                                                                            <i class="fas fa-exclamation-square"></i>
-                                                                            <i class="fas fa-badge-check"></i>
-                                            <h1><span class="label label-default">Готово</span></h1>
-                                                                        <button type="button" class="btn btn-labeled btn-success">
-                                                                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Готово
-                                                                        </button>*@
-
                                         <button class="btn-green">
                                             <span class="btn-gradient">
                                                 <i class="fa fa-check"></i>
@@ -146,54 +82,26 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">
-                                Previous
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item active">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
-                                1
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">
-                                2
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">
-                                3
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">
-                                4
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">
-                                5
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">
-                                6
-                            </a>
-                        </li>
-                        <li class="paginate_button page-item next" id="dataTable_next">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <nav>
+            <ul class="pagination">
+                @{int page = Model.Page; }
+                <li class="page-item @(page == 1? "disabled":"")">
+                    <a class="page-link" asp-action="TablesActive" asp-controller="Admin"
+                       asp-route-page="@(page - 1)" asp-route-name="@Model.Filter.Name" tabindex="-1">Previous</a>
+                </li>
+                @for (int i = 1; i < Model.MaxPage + 1; i++)
+                {
+                    <li class="page-item @(page == i ? "active": "" )">
+                        <a class="page-link" asp-action="TablesActive" asp-controller="Admin"
+                           asp-route-page="@i" asp-route-name="@Model.Filter.Name">@i <span class="sr-only">(current)</span></a>
+                    </li>
+                }
+                <li class="page-item @(page == Model.MaxPage? "disabled":"")">
+                    <a class="page-link" asp-action="TablesActive" asp-controller="Admin" asp-route-page="@(page+1)"
+                       asp-route-name="@Model.Filter.Name">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
 

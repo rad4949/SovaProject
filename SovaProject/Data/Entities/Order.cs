@@ -10,33 +10,34 @@ namespace SovaProject.Data.Models
     public class Order
     {
         [BindNever]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Введіть ім'я")]
         [StringLength(15)]
         [Required(ErrorMessage = "Ім'я не більше 15 символів")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Введіть прізвище")]
         [StringLength(15)]
         [Required(ErrorMessage = "Прізвище не більше 15 символів")]
-        public string surname { get; set; }
+        public string Surname { get; set; }
 
         [Display(Name = "Введіть адрес")]
         [StringLength(255)]
         [Required(ErrorMessage = "Адрес не більше 255 символів")]
-        public string adress { get; set; }
+        public string Adress { get; set; }
 
         [Display(Name = "Введіть свій телефон")]
         [StringLength(10)]
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Телефон не більше 10 символів")]
-        public string phone { get; set; }
+        public string Phone { get; set; }
 
         [BindNever]
         [ScaffoldColumn(false)]
-        public DateTime orderTime { get; set; }
+        public DateTime OrderTime { get; set; }
 
-        public List<OrderDetail> orderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+        public bool IsActive { get; set; }
     }
 }

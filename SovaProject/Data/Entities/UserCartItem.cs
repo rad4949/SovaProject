@@ -9,11 +9,8 @@ namespace SovaProject.Data.Models
     public class UserCartItem
     {
         public int Id { get; set; }
-        public Taruf taruf { get; set; }
-        public uint price { get; set; }
+        public Taruf Taruf { get; set; }
+        public uint Price { get; set; }
         public string UserCartId { get; set; }
-        //[ForeignKey("taruf")]
-        //public int tarufId { get; set; }
-
     }
 }

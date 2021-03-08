@@ -53,9 +53,9 @@
 <link href="~/css/main.css" rel="stylesheet" media="all">
 
 <style>
-    .colorCard {
+    /*.colorCard {
         background-color: #90ff77;
-    }
+    }*/
     .colorText{
         color: black;
     }
@@ -163,20 +163,20 @@
                 <h2 class="colorText title">Створення замовлення</h2>
                 <form method="POST">
                     <div class="input-group">
-                        <input asp-for="name" class="input--style-3" type="text" placeholder="Введіть ім'я" name="name">
-                        <span asp-validation-for="name" class="text-danger"></span>
+                        <input asp-for="Name" class="input--style-3" type="text" placeholder="Введіть ім'я" name="name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="input-group">
-                        <input asp-for="surname" class="input--style-3" type="text" placeholder="Введіть прізвище" name="surname">
-                        <span asp-validation-for="surname" class="text-danger"></span>
+                        <input asp-for="Surname" class="input--style-3" type="text" placeholder="Введіть прізвище" name="surname">
+                        <span asp-validation-for="Surname" class="text-danger"></span>
                     </div>
                     <div class="input-group">
-                        <input asp-for="adress" class="input--style-3" type="text" placeholder="Введіть адрес" name="adress">
-                        <span asp-validation-for="adress" class="text-danger"></span>
+                        <input asp-for="Adress" class="input--style-3" type="text" placeholder="Введіть адрес" name="adress">
+                        <span asp-validation-for="Adress" class="text-danger"></span>
                     </div>
                     <div class="input-group">
-                        <input asp-for="phone" class="input--style-3" type="text" placeholder="Введіть телефон" name="phone">
-                        <span asp-validation-for="phone" class="text-danger"></span>
+                        <input asp-for="Phone" class="input--style-3" type="text" placeholder="Введіть телефон" name="phone">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div>
                         <button class="btn btn--pill btn--green" type="submit">Закінчити замовлення</button>

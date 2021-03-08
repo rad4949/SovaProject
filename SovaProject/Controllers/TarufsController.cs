@@ -29,28 +29,28 @@ namespace SovaProject.Controllers
             string currCategory = "";
             if (string.IsNullOrEmpty(category))
             {
-                tarufs = _allTarufs.Tarufs.OrderBy(i => i.id);
+                tarufs = _allTarufs.Tarufs.OrderBy(i => i.Id);
             }
             else
             {
                 if (string.Equals("Sarny", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.categoryName.Equals("Сарни")).OrderBy(i => i.id);
+                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.CategoryName.Equals("Сарни")).OrderBy(i => i.Id);
                     currCategory = "Сарни";
                 }
                 if (string.Equals("Klesiv", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.categoryName.Equals("Клесів")).OrderBy(i => i.id);
+                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.CategoryName.Equals("Клесів")).OrderBy(i => i.Id);
                     currCategory = "Клесів";
                 }
                 if (string.Equals("ExperimentalStation", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.categoryName.Equals("Дослідна станція")).OrderBy(i => i.id);
+                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.CategoryName.Equals("Дослідна станція")).OrderBy(i => i.Id);
                     currCategory = "Дослідна станція";
                 }
                 if (string.Equals("Karpylivka", category, StringComparison.OrdinalIgnoreCase))
                 {
-                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.categoryName.Equals("Карпилівка")).OrderBy(i => i.id);
+                    tarufs = _allTarufs.Tarufs.Where(i => i.Category.CategoryName.Equals("Карпилівка")).OrderBy(i => i.Id);
                     currCategory = "Карпилівка";
                 }
             }

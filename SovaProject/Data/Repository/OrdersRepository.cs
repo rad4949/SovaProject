@@ -21,17 +21,17 @@ namespace SovaProject.Data.Repository
         }
         public void createOrder(Order order)
         {
-            //order.orderTime = DateTime.Now;
-            //_appDBContent.Order.Add(order);
-            //var items = _appDBContent.UserCartItem.Include(x => x.taruf).AsQueryable();
+            //Order.OrderTime = DateTime.Now;
+            //_appDBContent.Order.Add(Order);
+            //var items = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
 
             //foreach (var el in items)
             //{
             //    var orderDetail = new OrderDetail()
             //    {
             //        TarufID = el.tarufId,
-            //        orderID = order.id,
-            //        price = el.price 
+            //        OrderID = Order.Id,
+            //        Price = el.Price 
             //    };
             //    _appDBContent.OrderDetail.Add(orderDetail);
             //}
@@ -39,26 +39,20 @@ namespace SovaProject.Data.Repository
 
             /////////////////////////////////////////////////////////////////////////////
             
-            order.orderTime = DateTime.Now;
+            order.OrderTime = DateTime.Now;
+            order.IsActive = false;
             _appDBContent.Order.Add(order);
             _appDBContent.SaveChanges();
-            var userIsActive = new UserIsActive()
-            {
-                orderId = order.id,
-                IsActive = false
-            };
-            _appDBContent.UserIsActives.Add(userIsActive);
-            _appDBContent.SaveChanges();
-
+           
             var items = userCart.listUserItems;
 
             foreach (var el in items)
             {
                 var orderDetail = new OrderDetail()
                 {
-                    TarufID = el.taruf.id,
-                    orderID = order.id,
-                    price = el.taruf.price
+                    TarufID = el.Taruf.Id,
+                    OrderID = order.Id,
+                    Price = el.Taruf.Price
                 };
                 _appDBContent.OrderDetail.Add(orderDetail);
             }

@@ -8,11 +8,15 @@ namespace SovaProject.ViewModels
 {
     public class TableActiveViewModel
     {
-        public List<ElementActive> listActiveElement { get; set; }
+        public int Page { get; set; }
+        public int MaxPage { get; set; }
+        public Filter Filter { get; set; }
+        public List<Order> ListActiveElement { get; set; }
     }
-    public class ElementActive
+    public class Filter
     {
-        public bool IsActive { get; set; }
-        public Order order { get; set; }
+        public string Name { get; set; }
     }
+
+   
 }

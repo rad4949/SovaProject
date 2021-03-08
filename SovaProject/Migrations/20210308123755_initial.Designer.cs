@@ -10,8 +10,8 @@ using SovaProject.Data.Entities;
 namespace SovaProject.Migrations
 {
     [DbContext(typeof(AppDBContent))]
-    [Migration("20210206141057_Add tblUserIsActive")]
-    partial class AddtblUserIsActive
+    [Migration("20210308123755_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,116 +224,119 @@ namespace SovaProject.Migrations
 
             modelBuilder.Entity("SovaProject.Data.Models.Category", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("categoryName")
+                    b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("desc")
+                    b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Category");
                 });
 
             modelBuilder.Entity("SovaProject.Data.Models.Order", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("adress")
+                    b.Property<string>("Adress")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<string>("name")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
-                    b.Property<DateTime>("orderTime")
+                    b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("phone")
+                    b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<string>("surname")
+                    b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Order");
                 });
 
             modelBuilder.Entity("SovaProject.Data.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("TarufID")
                         .HasColumnType("int");
 
-                    b.Property<int>("orderID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<long>("price")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("id");
+                    b.HasIndex("OrderID");
 
                     b.HasIndex("TarufID");
-
-                    b.HasIndex("orderID");
 
                     b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("SovaProject.Data.Models.Taruf", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("available")
+                    b.Property<bool>("Available")
                         .HasColumnType("bit");
 
-                    b.Property<int>("categoryID")
+                    b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.Property<string>("img")
+                    b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isFavorite")
+                    b.Property<bool>("IsFavorite")
                         .HasColumnType("bit");
 
-                    b.Property<string>("longDesc")
+                    b.Property<string>("LongDesc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("price")
+                    b.Property<long>("Price")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("shortDesc")
+                    b.Property<string>("ShortDesc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("categoryID");
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Taruf");
                 });
@@ -345,38 +348,20 @@ namespace SovaProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TarufId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserCartId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("price")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("tarufid")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("tarufid");
+                    b.HasIndex("TarufId");
 
                     b.ToTable("UserCartItem");
-                });
-
-            modelBuilder.Entity("SovaProject.Data.Models.UserIsActive", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("orderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("UserIsActives");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -432,15 +417,15 @@ namespace SovaProject.Migrations
 
             modelBuilder.Entity("SovaProject.Data.Models.OrderDetail", b =>
                 {
-                    b.HasOne("SovaProject.Data.Models.Taruf", "taruf")
-                        .WithMany()
-                        .HasForeignKey("TarufID")
+                    b.HasOne("SovaProject.Data.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SovaProject.Data.Models.Order", "order")
-                        .WithMany("orderDetails")
-                        .HasForeignKey("orderID")
+                    b.HasOne("SovaProject.Data.Models.Taruf", "Taruf")
+                        .WithMany()
+                        .HasForeignKey("TarufID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -448,17 +433,17 @@ namespace SovaProject.Migrations
             modelBuilder.Entity("SovaProject.Data.Models.Taruf", b =>
                 {
                     b.HasOne("SovaProject.Data.Models.Category", "Category")
-                        .WithMany("tarufs")
-                        .HasForeignKey("categoryID")
+                        .WithMany("Tarufs")
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("SovaProject.Data.Models.UserCartItem", b =>
                 {
-                    b.HasOne("SovaProject.Data.Models.Taruf", "taruf")
+                    b.HasOne("SovaProject.Data.Models.Taruf", "Taruf")
                         .WithMany()
-                        .HasForeignKey("tarufid");
+                        .HasForeignKey("TarufId");
                 });
 #pragma warning restore 612, 618
         }

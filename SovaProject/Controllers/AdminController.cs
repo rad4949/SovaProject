@@ -32,54 +32,54 @@ namespace SovaProject.Controllers
             {
                 new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==1).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==1).Count().ToString(),
                     label = "Січень"
                 },
                 new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==2).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==2).Count().ToString(),
                     label = "Лютий"
                 },
                 new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==3).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==3).Count().ToString(),
                     label = "Березень"
                 },
                 new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==4).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==4).Count().ToString(),
                     label = "Квітень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==5).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==5).Count().ToString(),
                     label = "Травень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==6).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==6).Count().ToString(),
                     label = "Червень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==7).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==7).Count().ToString(),
                     label = "Липень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==8).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==8).Count().ToString(),
                     label = "Серпень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==9).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==9).Count().ToString(),
                     label = "Вересень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==10).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==10).Count().ToString(),
                     label = "Жовтень"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==11).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==11).Count().ToString(),
                     label = "Листопад"
                 },new Element
                 {
-                    value = listOrder.Where(p=>p.orderTime.Month==12).Count().ToString(),
+                    value = listOrder.Where(p=>p.OrderTime.Month==12).Count().ToString(),
                     label = "Грудень"
                 },
             };
@@ -93,29 +93,30 @@ namespace SovaProject.Controllers
 
             return View(model);
         }
-        public IActionResult TablesActive()
+        public IActionResult TablesActive(Filter filter, int page = 1)
         {
             TableActiveViewModel model = new TableActiveViewModel();
-            List<ElementActive> listActiveElement = new List<ElementActive>();
-
-            List<Order> orderList = new List<Order>();
-            orderList = _appDBContent.Order.ToList();
-
-            List<UserIsActive> userIsActives = new List<UserIsActive>();
-            UserIsActive userActive = new UserIsActive();
-            userIsActives = _appDBContent.UserIsActives.ToList();
-
-            foreach (var item in orderList)
+            var query = _appDBContent.Order.AsQueryable();
+            if(!string.IsNullOrEmpty(filter.Name))
             {
-                userActive = userIsActives.Where(p => p.orderId == item.id).FirstOrDefault();
-                ElementActive elementActive = new ElementActive
-                {
-                    IsActive = userActive.IsActive,
-                    order = item
-                };
-                listActiveElement.Add(elementActive);
+                query = query.Where(x => x.Name.ToLower().Contains(filter.Name.ToLower()) ||
+                            x.Surname.ToLower().Contains(filter.Name.ToLower()));
             }
-            model.listActiveElement = listActiveElement;
+            int pageSize = 10;
+
+            int pageNo = page - 1;
+            model.ListActiveElement = query.OrderBy(x => x.Id)
+                .Skip(pageNo * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            int allCount = query.Count();
+
+            model.Page = page;
+            model.MaxPage = (int)Math.Ceiling((double)allCount / pageSize);
+
+            model.Filter = filter;
+
             return View(model);
         }
         public IActionResult Graph2()
@@ -130,13 +131,13 @@ namespace SovaProject.Controllers
 
             for (int i = 1; i <= 12; i++)
             {
-                listOrdersTemp = listOrders.Where(c => c.orderTime.Month == i).ToList();
+                listOrdersTemp = listOrders.Where(c => c.OrderTime.Month == i).ToList();
                 foreach (var item in listOrdersTemp)
                 {
-                    orderDetailsTemp = orderDetails.Where(p => p.orderID == item.id).ToList();
+                    orderDetailsTemp = orderDetails.Where(p => p.OrderID == item.Id).ToList();
                     foreach (var item2 in orderDetailsTemp)
                     {
-                        arrMoney[i - 1] += (decimal)item2.price;
+                        arrMoney[i - 1] += (decimal)item2.Price;
                     }
                 }
 
@@ -201,7 +202,8 @@ namespace SovaProject.Controllers
         [HttpPost]
         public IActionResult SetActive(int id)
         {
-            var element =_appDBContent.UserIsActives.Where(s => s.orderId == id).FirstOrDefault();
+            //var element =_appDBContent.UserIsActives.Where(s => s.orderId == id).FirstOrDefault();
+            var element =_appDBContent.Order.Where(s => s.Id == id).FirstOrDefault();
             element.IsActive = true;
             _appDBContent.SaveChanges();
             return RedirectToAction("TablesActive");
