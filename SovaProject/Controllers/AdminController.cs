@@ -114,7 +114,6 @@ namespace SovaProject.Controllers
 
             model.Page = page;
             model.MaxPage = (int)Math.Ceiling((double)allCount / pageSize);
-
             model.Filter = filter;
 
             return View(model);
