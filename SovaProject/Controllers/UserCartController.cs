@@ -16,27 +16,17 @@ namespace SovaProject.Controllers
     {
         private IAllTarufs _tarufRep;
         private readonly UserCart _userCart;
-        //private readonly AppDBContent _appDBContent;
 
-        public UserCartController(IAllTarufs tarufPep, UserCart userCart/*, AppDBContent appDBContent*/)
+        public UserCartController(IAllTarufs tarufPep, UserCart userCart)
         {
             _tarufRep = tarufPep;
             _userCart = userCart;
-            //_appDBContent = appDBContent;
         }
 
         public ViewResult Index()
         {
-            //var list = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
-            //UserCartViewModel obj = new UserCartViewModel();
-            //obj.userCart = list.Select(x => new UserCart1ViewModel
-            //{
-            //    Name = x.Taruf.Name,
-            //    Price = x.Price
-            //}).ToList();
-
             var items = _userCart.getUserItems();
-            _userCart.listUserItems = items;
+            _userCart.UserItems = items;
 
             var obj = new NewUserCartViewModel
             {
@@ -45,6 +35,7 @@ namespace SovaProject.Controllers
 
             return View(obj);
         }
+
         [Route("UserCart/addToCart/{Id?}")]
         public RedirectToActionResult addToCart(int id)
         {
@@ -53,7 +44,6 @@ namespace SovaProject.Controllers
             {
                 _userCart.AddToCart(item);
             }
-            //_appDBContent.SaveChanges();
             return RedirectToAction("Index");
         }
     }

@@ -75,14 +75,10 @@
                         using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline my-2 my-lg-0" }))
                         {
                             @Html.AntiForgeryToken()
-
-                            @*<a asp-controller="Profile" asp-action="Index">Привіт @User.Identity.Name</a>*@
-
                             <a href="#" onclick="document.getElementById('logoutForm').submit();"
                                class="@*nav-link*@ btn btn--pill btn--green">
                                 Вихід
                             </a>
-
                         }
                     }
                     else

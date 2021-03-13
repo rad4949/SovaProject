@@ -17,7 +17,7 @@ namespace SovaProject.Data.Models
             this._appDBContent = appDBContent;
         }
         public string UserCartId { get; set; }
-        public List<UserCartItem> listUserItems { get; set; }
+        public UserCartItem UserItems { get; set; }
 
         public static UserCart GetCart(IServiceProvider services)
         {
@@ -30,29 +30,18 @@ namespace SovaProject.Data.Models
 
         public void AddToCart(Taruf taruf)
         {
-            //var cart = new UserCartItem
-            //{
-            //    UserCartId = UserCartId,
-            //    Taruf = Taruf,
-            //    Price = Taruf.Price
-            //};
-            //_appDBContent.UserCartItem.Add(cart);
-            //_appDBContent.SaveChanges();
-
             _appDBContent.UserCartItem.Add(new UserCartItem
             {
                 UserCartId=UserCartId,
                 Taruf=taruf,
                 Price=taruf.Price
             });
-
             _appDBContent.SaveChanges();
         }
 
-        public List<UserCartItem> getUserItems()
+        public UserCartItem getUserItems()
         {
-            //return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.tarufId).ToList();
-            return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.Taruf).ToList();
+                return _appDBContent.UserCartItem.Where(c => c.UserCartId == UserCartId).Include(s => s.Taruf).ToList().LastOrDefault();
         }
     }
 }

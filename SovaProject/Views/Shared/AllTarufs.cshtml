@@ -108,7 +108,6 @@
         }
     </style>
 
-
     <div class="colorCard card col-lg-3 m-4 ">
         <img src="@Model.Img" class="card-img-top cardImg" alt="Model.name">
         <div class="card-body">
@@ -116,6 +115,7 @@
             <p class="card-text">@Model.ShortDesc</p>
             <p class="card-text">Ціна: @Model.Price.ToString("C3")</p>
             <p class="card-text">Місто: @Model.Category.CategoryName</p>
-            <p><a class="btn btn--pill btn--green " asp-controller="UserCart" asp-action="addToCart" asp-route-id="@Model.Id">Замовити</a></p>
+            <p><a class="btn btn--pill btn--green " asp-controller="UserCart"
+                  asp-action="addToCart" asp-route-id="@Model.Id">Замовити</a></p>
         </div>
     </div>

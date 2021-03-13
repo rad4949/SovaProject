@@ -15,14 +15,11 @@ namespace SovaProject.Controllers
     {
         private readonly IAllOrders allOrders;
         private readonly UserCart userCart;
-        //private readonly AppDBContent _appDBContent;
 
-        public OrderController(IAllOrders allOrders, UserCart userCart/*, AppDBContent appDBContent*/)
+        public OrderController(IAllOrders allOrders, UserCart userCart)
         {
             this.allOrders = allOrders;
             this.userCart = userCart;
-            //_appDBContent = appDBContent;
-
         }
         [HttpGet]
         public IActionResult Checkout()
@@ -32,22 +29,20 @@ namespace SovaProject.Controllers
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            //var listShopCart = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
-            userCart.listUserItems = userCart.getUserItems();
+            userCart.UserItems = userCart.getUserItems();
 
-            //if (listShopCart == null)
-            //{
-            //    ModelState.AddModelError("", "У вас мають бути вибрані товари");
-            //}
-            if (userCart.listUserItems.Count == 0)
+            if (userCart.UserItems.Price == 0)
             {
                 ModelState.AddModelError("", "У вас мають бути вибрані товари");
             }
-            if (ModelState.IsValid)
+            else
             {
-                allOrders.createOrder(order);
-                return RedirectToAction("Complete");
-            }
+                if (ModelState.IsValid)
+                {
+                    allOrders.createOrder(order);
+                    return RedirectToAction("Complete");
+                }
+            }            
 
             return View(order);
         }

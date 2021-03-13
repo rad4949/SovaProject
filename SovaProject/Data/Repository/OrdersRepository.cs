@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using SovaProject.Data.Entities;
 using SovaProject.Data.interfeces;
 using SovaProject.Data.Models;
@@ -21,42 +24,50 @@ namespace SovaProject.Data.Repository
         }
         public void createOrder(Order order)
         {
-            //Order.OrderTime = DateTime.Now;
-            //_appDBContent.Order.Add(Order);
-            //var items = _appDBContent.UserCartItem.Include(x => x.Taruf).AsQueryable();
-
-            //foreach (var el in items)
-            //{
-            //    var orderDetail = new OrderDetail()
-            //    {
-            //        TarufID = el.tarufId,
-            //        OrderID = Order.Id,
-            //        Price = el.Price 
-            //    };
-            //    _appDBContent.OrderDetail.Add(orderDetail);
-            //}
-            //_appDBContent.SaveChanges();
-
-            /////////////////////////////////////////////////////////////////////////////
-            
             order.OrderTime = DateTime.Now;
             order.IsActive = false;
             _appDBContent.Order.Add(order);
             _appDBContent.SaveChanges();
-           
-            var items = userCart.listUserItems;
+            var items = userCart.UserItems;
 
-            foreach (var el in items)
+            var orderDetail = new OrderDetail()
             {
-                var orderDetail = new OrderDetail()
-                {
-                    TarufID = el.Taruf.Id,
-                    OrderID = order.Id,
-                    Price = el.Taruf.Price
-                };
-                _appDBContent.OrderDetail.Add(orderDetail);
-            }
+                TarufID = items.Taruf.Id,
+                OrderID = order.Id,
+                Price = items.Taruf.Price
+            };
+            _appDBContent.OrderDetail.Add(orderDetail);
             _appDBContent.SaveChanges();
+
+           
+            string html = order.Surname + " " + order.Name + ", виконав замовлення за адресою: " + order.Adress;         
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Mrs. Chanandler Bong", "itstudentyre@gmail.com"));
+            message.To.Add(new MailboxAddress("Mrs. Chanandler Bong", "igor12radchuk@gmail.com"));
+            message.Subject = "How you doin'?";
+
+            message.Body = new TextPart("plain")
+            {
+                Text = @"Hey Chandler,I just wanted to let you know that Monica and I were going to go play some paintball, you in?-- Joey"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                client.Connect("smtp.gmail.com", 465, true);
+                client.Authenticate("itstudentyre@gmail.com", "thuoji5Ne+");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+            //using (var client = new MailKit.Net.Smtp.SmtpClient())
+            //{
+            //    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+            //    client.Connect("smtp.gmail.com", 465, true);
+            //    client.Authenticate("itstudentyre@gmail.com", "thuoji5Ne+");
+            //    client.Send(message);
+            //    client.Disconnect(true);
+            //}
         }
     }
 }

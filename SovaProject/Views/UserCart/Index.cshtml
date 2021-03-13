@@ -117,36 +117,19 @@
 </style>
 
 @model NewUserCartViewModel
-@*<div class="container">
-        @foreach (var el in Model.userCart.listUserItems)
-        {
-            <div class="alert alert-warning mt-3">
-                <b>Тариф: </b>@el.taruf.name <br />
-                <b>Ціна: </b>@el.taruf.price.ToString("C")
-            </div>
-        }
-        <hr />
-        <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Оплатити</a>
-    </div>*@
-
 <body>
     <div class="wrapper wrapper--w780 ">
         <div class="card card-3 colorCard">
             <div class="card-body colorCard">
                 <h2 class="colorText">Створення замовлення</h2>
-                @foreach (var el in Model.userCart.listUserItems)
-                {
-                    <div class="alert alert-warning mt-3">
-                        <b>Тариф: </b>@el.Taruf.Name <br />
-                        <b>Ціна: </b>@el.Taruf.Price.ToString("C")
-                    </div>
-                }
-                @*<a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout">Оплатити</a>*@
-                <a class="btn btn--pill btn--green" asp-controller="Order" asp-action="Checkout">Оплатити</a>
+                <div class="alert alert-warning mt-3">
+                    <b>Тариф: </b>@Model.userCart.UserItems.Taruf.Name <br />
+                    <b>Ціна: </b>@Model.userCart.UserItems.Taruf.Price.ToString("C")
+                </div>
+                <a class="btn btn--pill btn--green" asp-controller="Order" asp-action="Checkout">Оформити</a>
             </div>
         </div>
     </div>
-
 
     <!-- Jquery JS-->
     <script src="~/vendor/jqueryForm/jquery.min.js"></script>

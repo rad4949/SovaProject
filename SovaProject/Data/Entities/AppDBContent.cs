@@ -26,7 +26,6 @@ namespace SovaProject.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // использование Fluent API
             base.OnModelCreating(builder);
 
             builder.Entity<DbUserRole>(userRole =>

@@ -1,17 +1,66 @@
-﻿@model SovaProject.ViewModels.Filter
-<form asp-action="TablesActive" asp-controller="Admin" method="get">
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+﻿<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+<link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="~/css/Style.css" rel="stylesheet">
+<link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@model SovaProject.ViewModels.Filter
+    <div class="card shadow mb-1">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    @*<form asp-action="TablesActive" asp-controller="Admin" method="get">
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Введіть і'мя або фамілію</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <div class="form-group">
+                        <input type="submit" value="Пошук" class="btn btn-primary w-100 mt-4" />
+                    </div>
+                </div>
+            </div>
+        </form>*@
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input asp-for="Name" type="text"
+                                   class="form-control bg-light border-0 small" placeholder="Пошук ..."
+                                   aria-label="Search" aria-describedby="basic-addon2">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                                @*<input type="submit" value="Пошук" class="btn btn-primary w-100 mt-4" />*@
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <input type="submit" value="Пошук" class="btn btn-primary w-100 mt-4" />
-        </div>
-    </div>
-</div>
-</form>
+
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/js/sb-admin-2.min.js"></script>
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/demo/datatables-demo.js"></script>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
