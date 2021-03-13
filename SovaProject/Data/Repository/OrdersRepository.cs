@@ -42,13 +42,13 @@ namespace SovaProject.Data.Repository
            
             string html = order.Surname + " " + order.Name + ", виконав замовлення за адресою: " + order.Adress;         
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Mrs. Chanandler Bong", "itstudentyre@gmail.com"));
-            message.To.Add(new MailboxAddress("Mrs. Chanandler Bong", "igor12radchuk@gmail.com"));
-            message.Subject = "How you doin'?";
+            message.From.Add(new MailboxAddress(/*"Mrs. Chanandler Bong", */"itstudentyre@gmail.com"));
+            message.To.Add(new MailboxAddress(/*"Mrs. Chanandler Bong", */"igor12radchuk@gmail.com"));
+            message.Subject = "Нове повідомлення";
 
             message.Body = new TextPart("plain")
             {
-                Text = @"Hey Chandler,I just wanted to let you know that Monica and I were going to go play some paintball, you in?-- Joey"
+                Text = html/*@"Hey Chandler,I just wanted to let you know that Monica and I were going to go play some paintball, you in?-- Joey"*/
             };
 
             using (var client = new SmtpClient())
