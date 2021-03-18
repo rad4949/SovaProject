@@ -14,7 +14,7 @@ namespace SovaProject.Data.Models
 
         [Display(Name = "Введіть ім'я")]
         [StringLength(15)]
-        [Required(ErrorMessage = "Ім'я не більше 15 символів")]
+        [Required(ErrorMessage = "Ім'я не більше 15 символів ")]
         public string Name { get; set; }
 
         [Display(Name = "Введіть прізвище")]
